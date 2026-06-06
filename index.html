@@ -425,6 +425,276 @@ body{font-family:'DM Sans',system-ui,sans-serif;background:#DEDAD3;min-height:10
 .tp-fade-top{top:0;background:linear-gradient(to bottom,#F8F6F2 0%,transparent 100%)}
 .tp-fade-bot{bottom:0;background:linear-gradient(to top,#F8F6F2 0%,transparent 100%)}
 /* tp-selector-line removed — using sibling div instead */
+
+/* ═══════════════════════════════════════════════════════════════
+   ProLaia v2 — POLIT
+   Capa de millores additives. No anul·la la persistència ni la lògica.
+   ═══════════════════════════════════════════════════════════════ */
+
+/* — Tipografia i renderitzat — */
+html{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;text-rendering:optimizeLegibility}
+body{font-feature-settings:"ss01","cv11";letter-spacing:-0.005em}
+.app{box-shadow:0 1px 2px rgba(0,0,0,0.04),0 8px 32px rgba(28,28,26,0.10)}
+
+/* — Focus accessible — */
+button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:2px solid #185FA5;outline-offset:2px;border-radius:6px}
+.nav-btn:focus-visible{outline-offset:-2px}
+
+/* — Cards i botons amb microinteraccions — */
+.quick-card,.client-card,.session-row,.invoice-card,.ex-card,.sf-hist-card,.hist-item,.smart-card{transition:transform 0.12s cubic-bezier(0.32,0.72,0,1),box-shadow 0.12s,background 0.12s,border-color 0.12s}
+.quick-card:hover,.client-card:hover,.invoice-card:hover,.ex-card:hover{transform:translateY(-1px);box-shadow:0 2px 8px rgba(28,28,26,0.06)}
+.session-row:active,.quick-card:active,.client-card:active,.invoice-card:active{transform:translateY(0)}
+
+/* — Sidebar nav: micro-millores — */
+@media(min-width:768px){
+  .nav{padding-top:12px}
+  .nav-brand{font-weight:600;letter-spacing:-0.01em;padding-top:4px;padding-bottom:14px}
+  .nav-btn{transition:background 0.14s,color 0.14s,transform 0.1s}
+  .nav-btn.active{box-shadow:inset 0 0 0 0.5px rgba(255,255,255,0.06)}
+  .nav-btn .nav-icon{transition:transform 0.18s}
+  .nav-btn:hover .nav-icon{transform:scale(1.08)}
+  /* etiqueta de secció a la sidebar */
+  .nav-section-label{font-size:9px;color:#555553;letter-spacing:0.08em;text-transform:uppercase;padding:14px 13px 6px;font-weight:500}
+}
+
+/* — Topbar refinada — */
+.topbar{box-shadow:inset 0 -0.5px 0 #1a1a18}
+@media(min-width:768px){.topbar{padding:13px 22px 12px}}
+
+/* — Hero més polit — */
+.hero{background:linear-gradient(180deg,#2C2C2A 0%,#252523 100%);box-shadow:0 1px 0 rgba(255,255,255,0.04) inset}
+.hero-stat-n{letter-spacing:-0.02em;font-variant-numeric:tabular-nums}
+
+/* — Botons primaris més suaus — */
+.btn-main{box-shadow:0 1px 0 rgba(255,255,255,0.12) inset,0 1px 2px rgba(24,95,165,0.18)}
+.btn-main:hover{box-shadow:0 1px 0 rgba(255,255,255,0.12) inset,0 2px 6px rgba(24,95,165,0.28)}
+.btn-green{box-shadow:0 1px 0 rgba(255,255,255,0.12) inset,0 1px 2px rgba(29,158,117,0.18)}
+.btn-green:hover{box-shadow:0 1px 0 rgba(255,255,255,0.12) inset,0 2px 6px rgba(29,158,117,0.28)}
+
+/* — Search inputs amb icona — */
+.search{transition:border-color 0.15s,box-shadow 0.15s}
+.search:focus{border-color:#185FA5;box-shadow:0 0 0 3px rgba(24,95,165,0.10)}
+
+/* — Drawer: backdrop més suau — */
+.overlay{background:rgba(20,20,18,0.42);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)}
+.drawer{box-shadow:0 -10px 40px rgba(0,0,0,0.18)}
+@media(min-width:768px){.drawer{box-shadow:0 20px 60px rgba(0,0,0,0.25),0 0 0 0.5px rgba(0,0,0,0.06)}}
+
+/* ────────────────────────────────────────
+   MÒBIL — bottom nav + FAB
+   ──────────────────────────────────────── */
+.mobile-bottom-nav{display:none;position:fixed;left:0;right:0;bottom:0;z-index:60;background:rgba(44,44,42,0.96);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-top:0.5px solid #1a1a18;padding:6px 4px calc(6px + env(safe-area-inset-bottom))}
+.mobile-bottom-nav .mn-btn{flex:1;display:flex;flex-direction:column;align-items:center;gap:2px;padding:6px 2px;border:none;background:transparent;color:#888780;font-family:inherit;font-size:9.5px;cursor:pointer;border-radius:8px;-webkit-tap-highlight-color:transparent;transition:color 0.12s,background 0.12s}
+.mobile-bottom-nav .mn-btn:active{background:rgba(255,255,255,0.05)}
+.mobile-bottom-nav .mn-btn .mn-icon{font-size:18px;line-height:1;transition:transform 0.18s}
+.mobile-bottom-nav .mn-btn.active{color:#F0EEE8}
+.mobile-bottom-nav .mn-btn.active .mn-icon{transform:translateY(-1px) scale(1.05)}
+.mobile-bottom-nav .mn-btn.active .mn-label{font-weight:500}
+@media(max-width:767px){
+  .mobile-bottom-nav{display:flex}
+  body{padding-bottom:0}
+  .content{padding-bottom:calc(80px + env(safe-area-inset-bottom)) !important}
+  /* Compactar la top-nav en mòbil quan tenim bottom-nav */
+  .app .nav{padding:5px 8px 5px}
+  .app .nav-btn{padding:5px 9px;font-size:11.5px}
+}
+
+/* — FAB — */
+.fab{display:none;position:fixed;right:18px;bottom:calc(78px + env(safe-area-inset-bottom));z-index:55;width:54px;height:54px;border-radius:50%;border:none;background:#185FA5;color:#fff;font-size:24px;cursor:pointer;box-shadow:0 4px 14px rgba(24,95,165,0.42),0 2px 4px rgba(0,0,0,0.10);align-items:center;justify-content:center;transition:transform 0.12s,box-shadow 0.18s;font-family:inherit;-webkit-tap-highlight-color:transparent}
+.fab:active{transform:scale(0.94)}
+.fab:hover{box-shadow:0 6px 20px rgba(24,95,165,0.5),0 2px 6px rgba(0,0,0,0.12)}
+@media(max-width:767px){.fab{display:flex}.fab.fab-hide{display:none}}
+
+/* ────────────────────────────────────────
+   COMMAND PALETTE (⌘K)
+   ──────────────────────────────────────── */
+.cp-overlay{position:fixed;inset:0;background:rgba(20,20,18,0.45);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);z-index:300;display:none;align-items:flex-start;justify-content:center;padding-top:14vh;padding-left:16px;padding-right:16px}
+.cp-overlay.open{display:flex;animation:cpFade 0.14s ease}
+@keyframes cpFade{from{opacity:0}to{opacity:1}}
+.cp-modal{background:#F8F6F2;border-radius:14px;width:100%;max-width:560px;box-shadow:0 24px 60px rgba(0,0,0,0.28),0 0 0 0.5px rgba(0,0,0,0.08);overflow:hidden;animation:cpRise 0.18s cubic-bezier(0.32,0.72,0,1)}
+@keyframes cpRise{from{transform:translateY(-8px) scale(0.985);opacity:0}to{transform:translateY(0) scale(1);opacity:1}}
+.cp-search-row{display:flex;align-items:center;gap:10px;padding:14px 16px;border-bottom:0.5px solid #D3D1C7;background:#fff}
+.cp-search-icon{color:#888780;font-size:16px;line-height:1}
+.cp-search{flex:1;border:none;outline:none;background:transparent;font-family:inherit;font-size:15px;color:#2C2C2A;padding:2px 0}
+.cp-search::placeholder{color:#A8A7A2}
+.cp-hint{font-size:10px;color:#888780;background:#F0EEE8;border:0.5px solid #D3D1C7;border-radius:5px;padding:2px 6px;font-family:'SF Mono','Monaco',monospace;letter-spacing:0.02em}
+.cp-results{max-height:50vh;overflow-y:auto;padding:6px 0}
+.cp-group{padding:8px 14px 4px;font-size:10px;text-transform:uppercase;letter-spacing:0.08em;color:#888780;font-weight:500}
+.cp-item{display:flex;align-items:center;gap:11px;padding:8px 16px;cursor:pointer;border-left:2px solid transparent;font-size:13px;color:#2C2C2A}
+.cp-item:hover,.cp-item.cp-active{background:#EDECEA;border-left-color:#185FA5}
+.cp-item-ic{width:28px;height:28px;border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:13px;background:#fff;border:0.5px solid #D3D1C7;flex-shrink:0}
+.cp-item-ic.ic-blue{background:#E6F1FB;border-color:#B5D4F4;color:#185FA5}
+.cp-item-ic.ic-green{background:#E1F5EE;border-color:#9FE1CB;color:#0F6E56}
+.cp-item-ic.ic-purple{background:#EEEDFE;border-color:#AFA9EC;color:#534AB7}
+.cp-item-ic.ic-amber{background:#FAEEDA;border-color:#FAC775;color:#854F0B}
+.cp-item-ic.ic-gray{background:#EDECEA;border-color:#D3D1C7;color:#5F5E5A}
+.cp-item-main{flex:1;min-width:0}
+.cp-item-title{font-size:13px;color:#2C2C2A;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.cp-item-sub{font-size:11px;color:#888780;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-top:1px}
+.cp-item-kbd{font-size:10px;color:#888780;background:#F0EEE8;border:0.5px solid #D3D1C7;border-radius:5px;padding:1px 6px;font-family:'SF Mono','Monaco',monospace;letter-spacing:0.02em;flex-shrink:0}
+.cp-empty{padding:24px 16px;text-align:center;color:#888780;font-size:13px}
+.cp-footer{display:flex;align-items:center;gap:14px;padding:9px 14px;border-top:0.5px solid #D3D1C7;background:#F0EEE8;font-size:11px;color:#888780}
+.cp-foot-kbd{font-family:'SF Mono','Monaco',monospace;background:#fff;border:0.5px solid #D3D1C7;border-radius:4px;padding:1px 5px;color:#5F5E5A;margin-right:4px}
+@media(max-width:767px){.cp-overlay{padding-top:6vh}.cp-footer{display:none}}
+
+/* ────────────────────────────────────────
+   HELP / DRECERES (?)
+   ──────────────────────────────────────── */
+.kh-overlay{position:fixed;inset:0;background:rgba(20,20,18,0.45);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);z-index:280;display:none;align-items:center;justify-content:center;padding:16px}
+.kh-overlay.open{display:flex;animation:cpFade 0.14s ease}
+.kh-box{background:#F8F6F2;border-radius:14px;max-width:560px;width:100%;max-height:88vh;overflow-y:auto;box-shadow:0 24px 60px rgba(0,0,0,0.28),0 0 0 0.5px rgba(0,0,0,0.08);animation:cpRise 0.2s cubic-bezier(0.32,0.72,0,1)}
+.kh-head{display:flex;align-items:center;justify-content:space-between;padding:14px 18px;border-bottom:0.5px solid #D3D1C7;background:#fff}
+.kh-title{font-size:15px;font-weight:500;color:#2C2C2A}
+.kh-close{width:30px;height:30px;border-radius:8px;border:none;background:#EDECEA;color:#5F5E5A;font-size:14px;cursor:pointer;font-family:inherit}
+.kh-close:hover{background:#D3D1C7}
+.kh-body{padding:14px 18px 18px}
+.kh-section{margin-top:14px}
+.kh-section:first-child{margin-top:0}
+.kh-sec-title{font-size:10px;text-transform:uppercase;letter-spacing:0.08em;color:#888780;font-weight:500;margin-bottom:8px}
+.kh-row{display:flex;align-items:center;justify-content:space-between;padding:7px 0;border-bottom:0.5px solid #EDECEA}
+.kh-row:last-child{border-bottom:none}
+.kh-row-label{font-size:13px;color:#2C2C2A}
+.kh-row-keys{display:flex;gap:4px;flex-shrink:0}
+.kh-key{font-size:11px;color:#2C2C2A;background:#fff;border:0.5px solid #D3D1C7;border-bottom-width:1.5px;border-radius:5px;padding:2px 7px;font-family:'SF Mono','Monaco',monospace;letter-spacing:0.02em;min-width:18px;text-align:center}
+.kh-plus{font-size:11px;color:#888780;align-self:center}
+@media(max-width:767px){.kh-box{max-height:92vh}}
+
+/* ────────────────────────────────────────
+   TIMELINE — Avui
+   ──────────────────────────────────────── */
+.tl-wrap{background:#fff;border:0.5px solid #D3D1C7;border-radius:12px;padding:14px 14px 12px;margin-bottom:11px;position:relative;overflow:hidden}
+.tl-head{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:10px}
+.tl-head-title{font-size:13px;font-weight:500;color:#2C2C2A}
+.tl-head-sub{font-size:11px;color:#888780}
+.tl-grid{position:relative;padding-left:48px}
+.tl-row{position:relative;height:38px;border-top:0.5px dashed #EDECEA}
+.tl-row:first-child{border-top:none}
+.tl-hour{position:absolute;left:-48px;top:-7px;width:42px;font-size:10px;color:#888780;font-family:'SF Mono','Monaco',monospace;letter-spacing:0;text-align:right}
+.tl-row.tl-row-major{border-top-style:solid;border-top-color:#E8E6E0}
+.tl-now{position:absolute;left:-50px;right:0;display:flex;align-items:center;gap:6px;pointer-events:none;z-index:5;height:0}
+.tl-now-dot{width:9px;height:9px;border-radius:50%;background:#E24B4A;flex-shrink:0;box-shadow:0 0 0 3px rgba(226,75,74,0.16);animation:nowPulse 2s ease-in-out infinite}
+.tl-now-label{font-size:9.5px;font-weight:600;color:#E24B4A;font-family:'SF Mono','Monaco',monospace;background:#fff;padding:0 4px;border-radius:3px;line-height:14px;flex-shrink:0}
+.tl-now-line{flex:1;height:1.5px;background:#E24B4A;border-radius:1px;opacity:0.9}
+.tl-sess{position:absolute;left:4px;right:4px;background:#fff;border:0.5px solid #D3D1C7;border-left:3px solid #185FA5;border-radius:8px;padding:6px 9px;cursor:pointer;transition:all 0.12s;overflow:hidden;display:flex;flex-direction:column;justify-content:center;gap:1px;min-height:34px}
+.tl-sess:hover{background:#F5F3EE;border-color:#888780;border-left-color:#185FA5;box-shadow:0 2px 8px rgba(28,28,26,0.06);transform:translateY(-1px)}
+.tl-sess-name{font-size:12px;font-weight:500;color:#2C2C2A;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;line-height:1.2}
+.tl-sess-meta{font-size:10px;color:#888780;display:flex;align-items:center;gap:5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;line-height:1.2}
+.tl-sess.is-done{background:#F0FAF6;border-left-color:#1D9E75;border-color:#D5EEE3;opacity:0.85}
+.tl-sess.is-done .tl-sess-name{text-decoration:line-through;text-decoration-color:rgba(29,158,117,0.5);color:#5F5E5A}
+.tl-sess.is-cancel{background:#FFF5F5;border-left-color:#E24B4A;border-color:#F3D6D6;opacity:0.8}
+.tl-sess.is-cancel .tl-sess-name{text-decoration:line-through;text-decoration-color:rgba(226,75,74,0.5);color:#5F5E5A}
+.tl-sess.is-active{border-color:#1D9E75;border-left-color:#1D9E75;box-shadow:0 0 0 1.5px rgba(29,158,117,0.16)}
+.tl-sess-done-btn{position:absolute;right:6px;top:50%;transform:translateY(-50%);width:24px;height:24px;border-radius:6px;border:0.5px solid #D3D1C7;background:#F8F6F2;color:#888780;cursor:pointer;font-size:11px;display:flex;align-items:center;justify-content:center;transition:all 0.12s;font-family:inherit;-webkit-tap-highlight-color:transparent}
+.tl-sess-done-btn:hover{background:#1D9E75;color:#fff;border-color:#1D9E75}
+.tl-sess.is-done .tl-sess-done-btn{background:#1D9E75;color:#fff;border-color:#1D9E75}
+.tl-sess-content{padding-right:32px}
+.tl-empty{padding:18px 0;text-align:center;color:#888780;font-size:12px}
+.tl-empty-mini{font-size:24px;margin-bottom:6px;opacity:0.5}
+.tl-legend{display:flex;align-items:center;justify-content:space-between;margin-top:10px;padding-top:9px;border-top:0.5px solid #EDECEA;gap:8px;font-size:10px;color:#888780}
+.tl-legend-items{display:flex;gap:10px;flex-wrap:wrap}
+.tl-legend-item{display:inline-flex;align-items:center;gap:4px}
+.tl-legend-dot{width:7px;height:7px;border-radius:50%}
+
+/* ────────────────────────────────────────
+   "Acabar les coses" — accent visual a botons d'acció ràpida
+   ──────────────────────────────────────── */
+.quick-action-pill{display:inline-flex;align-items:center;gap:5px;padding:4px 9px;border-radius:20px;background:#EDECEA;border:0.5px solid #D3D1C7;font-size:11px;color:#2C2C2A;cursor:pointer;font-family:inherit;transition:all 0.12s;-webkit-tap-highlight-color:transparent}
+.quick-action-pill:hover{background:#185FA5;color:#fff;border-color:#185FA5}
+.quick-action-pill.is-done{background:#E1F5EE;border-color:#9FE1CB;color:#0F6E56}
+
+/* — Hint subtle ⌘K a l'escriptori — */
+.kbd-hint{display:none;align-items:center;gap:4px;padding:4px 8px;border-radius:7px;background:#3A3A38;border:0.5px solid #5F5E5A;color:#A8A7A2;font-size:11px;cursor:pointer;font-family:inherit;-webkit-tap-highlight-color:transparent;transition:all 0.12s;margin-right:4px}
+.kbd-hint:hover{background:#444442;color:#F0EEE8}
+.kbd-hint kbd{font-family:'SF Mono','Monaco',monospace;font-size:10px;background:#2C2C2A;border:0.5px solid #5F5E5A;border-radius:4px;padding:0 4px;color:#D3D1C7;line-height:14px}
+@media(min-width:768px){.kbd-hint{display:inline-flex}}
+
+/* — Toast millorat — */
+.toast{transition:opacity 0.18s,transform 0.22s cubic-bezier(0.32,0.72,0,1)}
+
+/* — Animació subtil per a la fila de sessió quan canvia d'estat — */
+@keyframes statusPop{0%{transform:scale(1)}50%{transform:scale(1.04)}100%{transform:scale(1)}}
+.status-pop{animation:statusPop 0.32s cubic-bezier(0.32,0.72,0,1)}
+
+/* ════════════════════════════════════
+   INICI — Dashboard
+   ════════════════════════════════════ */
+.hd-next{background:linear-gradient(135deg,#2C2C2A 0%,#1f1f1d 100%);border-radius:14px;padding:16px 18px;margin-bottom:12px;color:#F0EEE8;position:relative;overflow:hidden;cursor:default;transition:all 0.18s}
+.hd-next.is-ongoing{background:linear-gradient(135deg,#0F6E56 0%,#0a5944 100%)}
+.hd-next-badge{font-size:10px;font-weight:600;letter-spacing:0.1em;color:rgba(255,255,255,0.55);text-transform:uppercase;margin-bottom:10px;display:flex;align-items:center;gap:6px}
+.hd-next.is-ongoing .hd-next-badge{color:#9FE1CB}
+.hd-ongoing-pulse{display:inline-block;width:8px;height:8px;border-radius:50%;background:#9FE1CB;box-shadow:0 0 0 0 rgba(159,225,203,0.6);animation:pulseDot 1.6s ease-in-out infinite}
+@keyframes pulseDot{0%,100%{box-shadow:0 0 0 0 rgba(159,225,203,0.6)}50%{box-shadow:0 0 0 6px rgba(159,225,203,0)}}
+.hd-next-body{display:flex;align-items:center;gap:16px;cursor:pointer}
+.hd-next-time{font-size:34px;font-weight:500;letter-spacing:-0.02em;color:#F0EEE8;font-variant-numeric:tabular-nums;line-height:1;flex-shrink:0;min-width:80px}
+.hd-next.is-ongoing .hd-next-time{color:#fff}
+.hd-next-main{flex:1;min-width:0}
+.hd-next-name{font-size:16px;font-weight:500;color:#F0EEE8;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-bottom:3px}
+.hd-next.is-ongoing .hd-next-name{color:#fff}
+.hd-next-meta{font-size:12px;color:rgba(255,255,255,0.55);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.hd-next.is-ongoing .hd-next-meta{color:rgba(255,255,255,0.75)}
+.hd-next-actions{display:flex;gap:6px;margin-top:14px;flex-wrap:wrap}
+.hd-next-btn{padding:7px 12px;border-radius:8px;border:0.5px solid rgba(255,255,255,0.18);background:rgba(255,255,255,0.08);color:#F0EEE8;font-family:inherit;font-size:12px;font-weight:500;cursor:pointer;transition:all 0.12s;-webkit-tap-highlight-color:transparent;display:inline-flex;align-items:center;gap:4px}
+.hd-next-btn:hover{background:rgba(255,255,255,0.16);border-color:rgba(255,255,255,0.32)}
+.hd-next-btn.is-warn{background:rgba(250,199,117,0.16);border-color:rgba(250,199,117,0.4);color:#FAEEDA}
+.hd-next-btn.is-warn:hover{background:rgba(250,199,117,0.28)}
+.hd-next-btn.is-primary{background:#fff;color:#1a1a18;border-color:#fff}
+.hd-next-btn.is-primary:hover{background:#F0EEE8}
+
+.hd-empty-card{background:#fff;border:0.5px solid #D3D1C7;border-radius:12px;padding:24px 20px;margin-bottom:12px;text-align:center}
+.hd-empty-icon{font-size:32px;margin-bottom:8px;opacity:0.7}
+.hd-empty-title{font-size:14px;font-weight:500;color:#2C2C2A;margin-bottom:4px}
+.hd-empty-sub{font-size:12px;color:#888780;line-height:1.5}
+
+.hd-grid{display:grid;grid-template-columns:1fr;gap:10px;margin-bottom:12px}
+@media(min-width:768px){.hd-grid{grid-template-columns:1.2fr 1fr}}
+
+.hd-panel{background:#fff;border:0.5px solid #D3D1C7;border-radius:11px;padding:12px 14px}
+.hd-section-title{font-size:10px;font-weight:500;color:#888780;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:9px}
+
+.hd-task{display:flex;align-items:center;gap:10px;padding:9px 10px;background:#F8F6F2;border-radius:9px;cursor:pointer;transition:all 0.12s;border:0.5px solid transparent;margin-bottom:5px}
+.hd-task:last-child{margin-bottom:0}
+.hd-task:hover{background:#EEEDFE;border-color:#AFA9EC;transform:translateX(2px)}
+.hd-task-icon{width:30px;height:30px;border-radius:8px;background:#fff;border:0.5px solid #D3D1C7;display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0}
+.hd-task:hover .hd-task-icon{border-color:#534AB7}
+.hd-task-main{flex:1;min-width:0}
+.hd-task-text{font-size:13px;font-weight:500;color:#2C2C2A;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;line-height:1.3}
+.hd-task-sub{font-size:11px;color:#888780;margin-top:1px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.hd-task-arrow{font-size:14px;color:#B4B2A9;transition:transform 0.12s;flex-shrink:0}
+.hd-task:hover .hd-task-arrow{transform:translateX(3px);color:#534AB7}
+.hd-task-empty{font-size:12px;color:#1D9E75;padding:14px 8px;text-align:center;background:#F0FAF6;border-radius:8px;font-weight:500}
+
+.hd-quick-list{display:grid;grid-template-columns:1fr 1fr;gap:5px}
+@media(min-width:1100px){.hd-quick-list{grid-template-columns:1fr 1fr}}
+.hd-quick{display:flex;align-items:center;gap:7px;padding:9px 10px;background:#F8F6F2;border:0.5px solid transparent;border-radius:9px;cursor:pointer;font-family:inherit;transition:all 0.12s;-webkit-tap-highlight-color:transparent;text-align:left}
+.hd-quick:hover{background:#E6F1FB;border-color:#85B7EB}
+.hd-quick-ic{font-size:14px;flex-shrink:0;width:22px;text-align:center}
+.hd-quick-l{flex:1;font-size:12px;font-weight:500;color:#2C2C2A;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.hd-quick-kbd{font-size:9.5px;color:#888780;background:#fff;border:0.5px solid #D3D1C7;border-radius:4px;padding:1px 5px;font-family:'SF Mono','Monaco',monospace;flex-shrink:0}
+
+.hd-rest{background:#fff;border:0.5px solid #D3D1C7;border-radius:11px;padding:12px 14px;margin-bottom:12px}
+.hd-rest-list{display:flex;flex-direction:column;gap:4px}
+.hd-rest-item{display:flex;align-items:center;gap:10px;padding:8px 9px;border-radius:8px;cursor:pointer;transition:all 0.12s;border:0.5px solid transparent}
+.hd-rest-item:hover{background:#F8F6F2;border-color:#D3D1C7}
+.hd-rest-time{font-size:13px;font-weight:500;color:#5F5E5A;font-variant-numeric:tabular-nums;min-width:42px;flex-shrink:0}
+.hd-rest-name{flex:1;font-size:13px;color:#2C2C2A;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.hd-rest-badge{font-size:10px;color:#888780;background:#F0EEE8;padding:2px 8px;border-radius:10px;flex-shrink:0}
+.hd-rest-done{width:24px;height:24px;border-radius:6px;border:0.5px solid #D3D1C7;background:#F8F6F2;color:#888780;cursor:pointer;font-size:11px;display:flex;align-items:center;justify-content:center;font-family:inherit;flex-shrink:0;-webkit-tap-highlight-color:transparent;transition:all 0.12s}
+.hd-rest-done:hover{background:#1D9E75;color:#fff;border-color:#1D9E75}
+.hd-rest-item.is-done{opacity:0.6}
+.hd-rest-item.is-done .hd-rest-name{text-decoration:line-through;color:#5F5E5A}
+.hd-rest-item.is-done .hd-rest-done{background:#1D9E75;color:#fff;border-color:#1D9E75}
+.hd-rest-item.is-cancel{opacity:0.6}
+.hd-rest-item.is-cancel .hd-rest-name{text-decoration:line-through;color:#5F5E5A;text-decoration-color:rgba(226,75,74,0.5)}
+
+.hd-tpls{background:#fff;border:0.5px solid #D3D1C7;border-radius:11px;padding:12px 14px;margin-bottom:12px}
+.hd-tpl-chips{display:flex;flex-wrap:wrap;gap:6px}
+.hd-tpl-chip{display:inline-flex;align-items:center;gap:6px;padding:6px 11px;border-radius:18px;border:0.5px solid #D3D1C7;background:#F8F6F2;color:#2C2C2A;font-family:inherit;font-size:12px;cursor:pointer;transition:all 0.12s;-webkit-tap-highlight-color:transparent}
+.hd-tpl-chip:hover{border-color:#185FA5;background:#E6F1FB}
+.hd-tpl-chip.is-add{background:transparent;color:#185FA5;border-style:dashed}
+.hd-tpl-chip.is-add:hover{background:#E6F1FB}
+.hd-tpl-name{font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:160px}
+.hd-tpl-meta{font-size:10px;color:#888780;font-variant-numeric:tabular-nums}
+
 </style>
 </head>
 <body>
@@ -5728,8 +5998,1089 @@ document.addEventListener('keydown',e=>{
   if(e.key==='Enter') doLogin();
 });
 
-
-
 </script>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     ProLaia v2 — capa de millores additives
+     • Bottom nav + FAB per mòbil
+     • Command palette (⌘K) per a desktop
+     • Panell d'ajuda i dreceres (?)
+     • Timeline del dia a Inici
+     • Microinteraccions i sincronies de UI
+     ═══════════════════════════════════════════════════════════════ -->
+
+<!-- BOTTOM NAV (només mòbil) -->
+<nav class="mobile-bottom-nav" id="mobile-bottom-nav" aria-label="Navegació mòbil">
+  <button type="button" class="mn-btn active" data-tab="home" onclick="v2GoTab('home')"><span class="mn-icon">🏠</span><span class="mn-label">Inici</span></button>
+  <button type="button" class="mn-btn" data-tab="agenda" onclick="v2GoTab('agenda')"><span class="mn-icon">📅</span><span class="mn-label">Agenda</span></button>
+  <button type="button" class="mn-btn" data-tab="clients" onclick="v2GoTab('clients')"><span class="mn-icon">👥</span><span class="mn-label">Clients</span></button>
+  <button type="button" class="mn-btn" data-tab="exercicis" onclick="v2GoTab('exercicis')"><span class="mn-icon">💪</span><span class="mn-label">Exercicis</span></button>
+  <button type="button" class="mn-btn" data-tab="factures" onclick="v2GoTab('factures')"><span class="mn-icon">🧾</span><span class="mn-label">Factures</span></button>
+</nav>
+
+<!-- FAB (només mòbil) -->
+<button type="button" class="fab" id="fab" title="Nova sessió" aria-label="Nova sessió" onclick="openSessionDrawer()">+</button>
+
+<!-- COMMAND PALETTE (⌘K) -->
+<div class="cp-overlay" id="cp-overlay" onclick="if(event.target===this) cpClose()">
+  <div class="cp-modal" role="dialog" aria-label="Cerca ràpida">
+    <div class="cp-search-row">
+      <span class="cp-search-icon">⌕</span>
+      <input class="cp-search" id="cp-search" placeholder="Cercar clients, sessions, exercicis o accions..." autocomplete="off" spellcheck="false">
+      <span class="cp-hint">esc</span>
+    </div>
+    <div class="cp-results" id="cp-results"></div>
+    <div class="cp-footer">
+      <span><span class="cp-foot-kbd">↑↓</span> navegar</span>
+      <span><span class="cp-foot-kbd">↵</span> obrir</span>
+      <span style="margin-left:auto"><span class="cp-foot-kbd">⌘K</span> per tornar a obrir</span>
+    </div>
+  </div>
+</div>
+
+<!-- HELP / DRECERES -->
+<div class="kh-overlay" id="kh-overlay" onclick="if(event.target===this) khClose()">
+  <div class="kh-box" role="dialog" aria-label="Dreceres de teclat">
+    <div class="kh-head">
+      <div class="kh-title">Dreceres de teclat</div>
+      <button class="kh-close" onclick="khClose()" aria-label="Tancar">✕</button>
+    </div>
+    <div class="kh-body">
+      <div class="kh-section">
+        <div class="kh-sec-title">Cerca i navegació</div>
+        <div class="kh-row"><span class="kh-row-label">Obrir cerca ràpida</span><span class="kh-row-keys"><span class="kh-key">⌘</span><span class="kh-key">K</span></span></div>
+        <div class="kh-row"><span class="kh-row-label">Focus cerca a la pantalla</span><span class="kh-row-keys"><span class="kh-key">/</span></span></div>
+        <div class="kh-row"><span class="kh-row-label">Anar a Inici</span><span class="kh-row-keys"><span class="kh-key">G</span><span class="kh-plus">→</span><span class="kh-key">H</span></span></div>
+        <div class="kh-row"><span class="kh-row-label">Anar a Agenda</span><span class="kh-row-keys"><span class="kh-key">G</span><span class="kh-plus">→</span><span class="kh-key">A</span></span></div>
+        <div class="kh-row"><span class="kh-row-label">Anar a Clients</span><span class="kh-row-keys"><span class="kh-key">G</span><span class="kh-plus">→</span><span class="kh-key">C</span></span></div>
+        <div class="kh-row"><span class="kh-row-label">Anar a Plantilles</span><span class="kh-row-keys"><span class="kh-key">G</span><span class="kh-plus">→</span><span class="kh-key">P</span></span></div>
+        <div class="kh-row"><span class="kh-row-label">Anar a Exercicis</span><span class="kh-row-keys"><span class="kh-key">G</span><span class="kh-plus">→</span><span class="kh-key">E</span></span></div>
+        <div class="kh-row"><span class="kh-row-label">Anar a Factures</span><span class="kh-row-keys"><span class="kh-key">G</span><span class="kh-plus">→</span><span class="kh-key">F</span></span></div>
+        <div class="kh-row"><span class="kh-row-label">Anar al dia d'avui (agenda)</span><span class="kh-row-keys"><span class="kh-key">T</span></span></div>
+      </div>
+      <div class="kh-section">
+        <div class="kh-sec-title">Crear ràpid</div>
+        <div class="kh-row"><span class="kh-row-label">Nova sessió</span><span class="kh-row-keys"><span class="kh-key">N</span></span></div>
+        <div class="kh-row"><span class="kh-row-label">Nou client</span><span class="kh-row-keys"><span class="kh-key">⇧</span><span class="kh-key">C</span></span></div>
+        <div class="kh-row"><span class="kh-row-label">Nou exercici</span><span class="kh-row-keys"><span class="kh-key">⇧</span><span class="kh-key">E</span></span></div>
+        <div class="kh-row"><span class="kh-row-label">Nova plantilla</span><span class="kh-row-keys"><span class="kh-key">⇧</span><span class="kh-key">P</span></span></div>
+      </div>
+      <div class="kh-section">
+        <div class="kh-sec-title">Agenda</div>
+        <div class="kh-row"><span class="kh-row-label">Setmana anterior</span><span class="kh-row-keys"><span class="kh-key">J</span></span></div>
+        <div class="kh-row"><span class="kh-row-label">Setmana següent</span><span class="kh-row-keys"><span class="kh-key">K</span></span></div>
+      </div>
+      <div class="kh-section">
+        <div class="kh-sec-title">Diàleg</div>
+        <div class="kh-row"><span class="kh-row-label">Tancar diàleg / modal</span><span class="kh-row-keys"><span class="kh-key">Esc</span></span></div>
+        <div class="kh-row"><span class="kh-row-label">Mostrar aquest panell</span><span class="kh-row-keys"><span class="kh-key">?</span></span></div>
+      </div>
+      <div style="font-size:11px;color:#888780;margin-top:14px;padding:10px;background:#EDECEA;border-radius:8px;line-height:1.5">
+        <strong style="color:#5F5E5A">Consell:</strong> les dreceres es desactiven automàticament quan estàs escrivint en un camp de text.
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+/* ═══════════════════════════════════════════════════════════════
+   ProLaia v2 — JS additiu
+   Tot aquí és NOU. No toca lsSave/lsLoad/Supabase/auth.
+   ═══════════════════════════════════════════════════════════════ */
+(function(){
+'use strict';
+
+// — Utilitats — 
+function _$(id){return document.getElementById(id);}
+// Llegir dades vives des de localStorage (font de veritat — les vars internes són let i no van a window)
+function v2DataLs(){
+  try{
+    return {
+      clients: JSON.parse(localStorage.getItem('laiapro_clients')||'[]'),
+      sessions: JSON.parse(localStorage.getItem('laiapro_sessions')||'[]'),
+      exerciseDB: JSON.parse(localStorage.getItem('laiapro_exercises')||'{}'),
+      templates: JSON.parse(localStorage.getItem('laiapro_templates')||'[]')
+    };
+  }catch(e){return {clients:[],sessions:[],exerciseDB:{},templates:[]};}
+}
+function _isTyping(){const el=document.activeElement;if(!el) return false;const t=(el.tagName||'').toUpperCase();return t==='INPUT'||t==='TEXTAREA'||t==='SELECT'||el.isContentEditable;}
+function _anyModalOpen(){
+  const ov=document.getElementById('overlay');
+  const cp=document.getElementById('cp-overlay');
+  const kh=document.getElementById('kh-overlay');
+  const conf=document.querySelector('.confirm-modal.open');
+  return (ov&&ov.classList.contains('open'))||(cp&&cp.classList.contains('open'))||(kh&&kh.classList.contains('open'))||!!conf;
+}
+
+// ───────────────────────────────────────────────────────────
+// 1. BOTTOM NAV (mòbil) — sincronia amb showTab
+// ───────────────────────────────────────────────────────────
+window.v2GoTab=function(tab){
+  const map={home:0,agenda:1,clients:2,plantilles:3,exercicis:4,factures:5};
+  const btn=document.querySelectorAll('.nav .nav-btn')[map[tab]];
+  if(typeof window.showTab==='function'&&btn) window.showTab(tab,btn);
+  v2SyncBottomNav(tab);
+};
+function v2SyncBottomNav(tab){
+  document.querySelectorAll('.mobile-bottom-nav .mn-btn').forEach(b=>{
+    b.classList.toggle('active',b.dataset.tab===tab);
+  });
+}
+// Hook showTab perquè el bottom-nav segueixi sincronitzat sense tocar el codi original
+if(typeof window.showTab==='function'){
+  const _origShow=window.showTab;
+  window.showTab=function(id,btn){
+    _origShow(id,btn);
+    v2SyncBottomNav(id);
+    // FAB visible només a inici/agenda/clients (i només al mòbil via CSS)
+    const fab=_$('fab');
+    if(fab){fab.classList.toggle('fab-hide',!(id==='home'||id==='agenda'||id==='clients'));}
+  };
+}
+
+// ───────────────────────────────────────────────────────────
+// 2. KEYBOARD SHORTCUTS
+// ───────────────────────────────────────────────────────────
+let _gPrefix=false;let _gPrefixT=null;
+function _resetG(){_gPrefix=false;if(_gPrefixT){clearTimeout(_gPrefixT);_gPrefixT=null;}}
+function _setG(){_gPrefix=true;if(_gPrefixT) clearTimeout(_gPrefixT);_gPrefixT=setTimeout(_resetG,1400);}
+
+document.addEventListener('keydown',function(e){
+  // ⌘K / Ctrl+K — sempre disponible
+  if((e.metaKey||e.ctrlKey)&&(e.key==='k'||e.key==='K')){
+    e.preventDefault();
+    cpToggle();
+    return;
+  }
+  // Esc — tancar el que estigui obert
+  if(e.key==='Escape'){
+    const cp=_$('cp-overlay'),kh=_$('kh-overlay');
+    if(cp&&cp.classList.contains('open')){cpClose();return;}
+    if(kh&&kh.classList.contains('open')){khClose();return;}
+    return;
+  }
+  if(_isTyping()) return;
+  if(_anyModalOpen()) return; // no executar dreceres si hi ha un drawer obert
+
+  // g prefix (Gmail-style)
+  if(_gPrefix){
+    const k=e.key.toLowerCase();
+    if('hacpef'.includes(k)){
+      e.preventDefault();
+      const map={h:'home',a:'agenda',c:'clients',p:'plantilles',e:'exercicis',f:'factures'};
+      window.v2GoTab(map[k]);
+      _resetG();
+      return;
+    }
+    _resetG();
+  }
+  if(e.key==='g'||e.key==='G'){e.preventDefault();_setG();return;}
+
+  // ?
+  if(e.key==='?'){e.preventDefault();khOpen();return;}
+  // /
+  if(e.key==='/'){
+    const visible=document.querySelector('.section.active input.search');
+    if(visible){e.preventDefault();visible.focus();visible.select();return;}
+    e.preventDefault();cpOpen();return;
+  }
+  // T — avui (només a l'agenda en té sentit total, però sempre porta a agenda)
+  if(e.key==='t'||e.key==='T'){
+    e.preventDefault();
+    window.v2GoTab('agenda');
+    if(typeof window.goToToday==='function') window.goToToday();
+    return;
+  }
+  // N — nova sessió
+  if(e.key==='n'||e.key==='N'){
+    e.preventDefault();
+    if(typeof window.openSessionDrawer==='function') window.openSessionDrawer();
+    return;
+  }
+  // J/K setmana
+  if(e.key==='j'||e.key==='J'){
+    const ag=document.getElementById('s-agenda');
+    if(ag&&ag.classList.contains('active')&&typeof window.shiftWeek==='function'){e.preventDefault();window.shiftWeek(-1);}
+    return;
+  }
+  if(e.key==='k'||e.key==='K'){
+    const ag=document.getElementById('s-agenda');
+    if(ag&&ag.classList.contains('active')&&typeof window.shiftWeek==='function'){e.preventDefault();window.shiftWeek(1);}
+    return;
+  }
+  // Shift+C / Shift+E / Shift+P
+  if(e.shiftKey&&(e.key==='C'||e.key==='c')){
+    if(typeof window.openClientDrawer==='function'){e.preventDefault();window.openClientDrawer();}
+    return;
+  }
+  if(e.shiftKey&&(e.key==='E'||e.key==='e')){
+    if(typeof window.openExerciseDrawer==='function'){e.preventDefault();window.openExerciseDrawer();}
+    return;
+  }
+  if(e.shiftKey&&(e.key==='P'||e.key==='p')){
+    if(typeof window.openTemplateDrawer==='function'){e.preventDefault();window.openTemplateDrawer();}
+    return;
+  }
+});
+
+// ───────────────────────────────────────────────────────────
+// 3. COMMAND PALETTE
+// ───────────────────────────────────────────────────────────
+let _cpActive=0;let _cpItems=[];
+window.cpOpen=function(){
+  const ov=_$('cp-overlay'),s=_$('cp-search');
+  if(!ov||!s) return;
+  ov.classList.add('open');
+  s.value='';_cpActive=0;
+  cpRender('');
+  setTimeout(()=>s.focus(),20);
+};
+window.cpClose=function(){
+  const ov=_$('cp-overlay');
+  if(ov) ov.classList.remove('open');
+};
+window.cpToggle=function(){
+  const ov=_$('cp-overlay');
+  if(ov&&ov.classList.contains('open')) cpClose();else cpOpen();
+};
+
+function cpBuildSources(q){
+  const out=[];
+  const lq=(q||'').toLowerCase().trim();
+  // Quick actions (sempre primer)
+  const actions=[
+    {title:'Nova sessió',sub:'Crear una nova sessió ràpidament',ic:'➕',ic_cls:'ic-blue',kbd:'N',run:()=>{cpClose();window.openSessionDrawer&&window.openSessionDrawer();}},
+    {title:'Nou client',sub:'Afegir un client nou',ic:'👤',ic_cls:'ic-green',kbd:'⇧C',run:()=>{cpClose();window.openClientDrawer&&window.openClientDrawer();}},
+    {title:'Nou exercici',sub:'Afegir un exercici al banc',ic:'💪',ic_cls:'ic-purple',kbd:'⇧E',run:()=>{cpClose();window.openExerciseDrawer&&window.openExerciseDrawer();}},
+    {title:'Nova plantilla',sub:'Crear plantilla d\'entrenament',ic:'📋',ic_cls:'ic-amber',kbd:'⇧P',run:()=>{cpClose();window.openTemplateDrawer&&window.openTemplateDrawer();}},
+    {title:'Anar a Inici',sub:'Resum del dia',ic:'🏠',ic_cls:'ic-gray',kbd:'G H',run:()=>{cpClose();window.v2GoTab('home');}},
+    {title:'Anar a Agenda',sub:'Vista setmanal',ic:'📅',ic_cls:'ic-gray',kbd:'G A',run:()=>{cpClose();window.v2GoTab('agenda');}},
+    {title:'Anar a Clients',sub:'Llista de clients',ic:'👥',ic_cls:'ic-gray',kbd:'G C',run:()=>{cpClose();window.v2GoTab('clients');}},
+    {title:'Anar a Plantilles',sub:'Plantilles d\'entrenament',ic:'📋',ic_cls:'ic-gray',kbd:'G P',run:()=>{cpClose();window.v2GoTab('plantilles');}},
+    {title:'Anar a Exercicis',sub:'Banc d\'exercicis',ic:'💪',ic_cls:'ic-gray',kbd:'G E',run:()=>{cpClose();window.v2GoTab('exercicis');}},
+    {title:'Anar a Factures',sub:'Facturació mensual',ic:'🧾',ic_cls:'ic-gray',kbd:'G F',run:()=>{cpClose();window.v2GoTab('factures');}},
+    {title:'Avui',sub:'Tornar al dia d\'avui a l\'agenda',ic:'📍',ic_cls:'ic-gray',kbd:'T',run:()=>{cpClose();window.v2GoTab('agenda');window.goToToday&&window.goToToday();}},
+    {title:'Dreceres de teclat',sub:'Mostrar totes les dreceres',ic:'⌨',ic_cls:'ic-gray',kbd:'?',run:()=>{cpClose();khOpen();}},
+    {title:'Configuració',sub:'Obrir paràmetres',ic:'⚙',ic_cls:'ic-gray',run:()=>{cpClose();window.openSettings&&window.openSettings();}}
+  ];
+  actions.forEach(a=>{a.group='Accions';out.push(a);});
+
+  // Clients
+  try{
+    const cs=v2DataLs().clients;
+    cs.forEach(c=>{
+      const name=(typeof window.clientName==='function')?window.clientName(c):(c.nom||'');
+      out.push({
+        group:'Clients',
+        title:name,
+        sub:(c.context==='bcn'?'BCN':'Vindi')+(c.tel?' · '+c.tel:''),
+        ic:(typeof window.clientInitials==='function'?window.clientInitials(c):(name||'?').slice(0,2).toUpperCase()),
+        ic_cls:'ic-blue',
+        run:()=>{cpClose();window.v2GoTab('clients');setTimeout(()=>window.openClientDetail&&window.openClientDetail(c.id),50);}
+      });
+    });
+  }catch(err){}
+
+  // Exercicis
+  try{
+    const ex=v2DataLs().exerciseDB;
+    Object.values(ex).flat().forEach(e=>{
+      if(!e||!e.nom) return;
+      out.push({
+        group:'Exercicis',
+        title:e.nom,
+        sub:(e.grup||'')+(e.dificultat?' · '+e.dificultat:''),
+        ic:'💪',
+        ic_cls:'ic-purple',
+        run:()=>{cpClose();window.v2GoTab('exercicis');setTimeout(()=>{const inp=document.getElementById('ex-search');if(inp){inp.value=e.nom;window.filterExercises&&window.filterExercises(e.nom);}},80);}
+      });
+    });
+  }catch(err){}
+
+  // Plantilles
+  try{
+    v2DataLs().templates.forEach(t=>{
+      out.push({
+        group:'Plantilles',
+        title:t.nom||'Plantilla',
+        sub:(t.exercises?t.exercises.length:0)+' exercicis',
+        ic:'📋',
+        ic_cls:'ic-amber',
+        run:()=>{cpClose();window.v2GoTab('plantilles');}
+      });
+    });
+  }catch(err){}
+
+  // Sessions properes (avui i fins a 7 dies)
+  try{
+    const sessAll=v2DataLs().sessions.slice();
+    const today=new Date();
+    const todayIso=(typeof window.isoDate==='function')?window.isoDate(today):today.toISOString().slice(0,10);
+    const upcoming=sessAll.filter(s=>s.date>=todayIso).sort((a,b)=>(a.date+a.t).localeCompare(b.date+b.t)).slice(0,15);
+    upcoming.forEach(s=>{
+      const name=(typeof window.sessDisplayName==='function')?window.sessDisplayName(s):'Sessió';
+      out.push({
+        group:'Sessions properes',
+        title:name+' · '+s.t,
+        sub:s.date+' · '+(s.dur||'')+(s.status==='done'?' · feta':s.status==='cancel'?' · cancel·lada':''),
+        ic:'📅',
+        ic_cls:s.status==='done'?'ic-green':'ic-gray',
+        run:()=>{cpClose();window.openSessionDetail&&window.openSessionDetail(s.id);}
+      });
+    });
+  }catch(err){}
+
+  if(!lq) return out;
+  // Filtrar per coincidència simple (case-insensitive)
+  return out.filter(x=>(x.title+' '+(x.sub||'')+' '+(x.group||'')).toLowerCase().includes(lq));
+}
+
+function cpRender(q){
+  const box=_$('cp-results');
+  if(!box) return;
+  const items=cpBuildSources(q);
+  _cpItems=items;_cpActive=0;
+  if(!items.length){
+    box.innerHTML='<div class="cp-empty">Sense resultats per "<strong>'+escapeHtml(q)+'</strong>"</div>';
+    return;
+  }
+  // Agrupar
+  const byGroup={};const order=[];
+  items.forEach((it,i)=>{const g=it.group||'';if(!byGroup[g]){byGroup[g]=[];order.push(g);}byGroup[g].push({...it,_idx:i});});
+  let html='';
+  order.forEach(g=>{
+    html+='<div class="cp-group">'+escapeHtml(g)+'</div>';
+    byGroup[g].forEach(it=>{
+      html+='<div class="cp-item" data-idx="'+it._idx+'">'
+        +'<div class="cp-item-ic '+(it.ic_cls||'')+'">'+escapeHtml(it.ic||'·')+'</div>'
+        +'<div class="cp-item-main"><div class="cp-item-title">'+escapeHtml(it.title)+'</div>'
+        +(it.sub?'<div class="cp-item-sub">'+escapeHtml(it.sub)+'</div>':'')+'</div>'
+        +(it.kbd?'<span class="cp-item-kbd">'+escapeHtml(it.kbd)+'</span>':'')
+        +'</div>';
+    });
+  });
+  box.innerHTML=html;
+  cpUpdateActive();
+  box.querySelectorAll('.cp-item').forEach(el=>{
+    el.addEventListener('click',()=>{
+      const i=parseInt(el.dataset.idx,10);
+      if(_cpItems[i]&&typeof _cpItems[i].run==='function') _cpItems[i].run();
+    });
+    el.addEventListener('mousemove',()=>{
+      _cpActive=parseInt(el.dataset.idx,10);cpUpdateActive();
+    });
+  });
+}
+function cpUpdateActive(){
+  const box=_$('cp-results');if(!box) return;
+  box.querySelectorAll('.cp-item').forEach(el=>{
+    const i=parseInt(el.dataset.idx,10);
+    el.classList.toggle('cp-active',i===_cpActive);
+  });
+  const act=box.querySelector('.cp-item.cp-active');
+  if(act){
+    const r=act.getBoundingClientRect(),b=box.getBoundingClientRect();
+    if(r.bottom>b.bottom) act.scrollIntoView({block:'nearest'});
+    else if(r.top<b.top) act.scrollIntoView({block:'nearest'});
+  }
+}
+function escapeHtml(s){return String(s==null?'':s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
+
+// Search input behavior
+(function bindCpSearch(){
+  const s=_$('cp-search');if(!s) return;
+  s.addEventListener('input',e=>cpRender(e.target.value));
+  s.addEventListener('keydown',e=>{
+    if(e.key==='ArrowDown'){e.preventDefault();_cpActive=Math.min(_cpActive+1,_cpItems.length-1);cpUpdateActive();}
+    else if(e.key==='ArrowUp'){e.preventDefault();_cpActive=Math.max(_cpActive-1,0);cpUpdateActive();}
+    else if(e.key==='Enter'){e.preventDefault();const it=_cpItems[_cpActive];if(it&&typeof it.run==='function') it.run();}
+  });
+})();
+
+// ───────────────────────────────────────────────────────────
+// 4. HELP (?)
+// ───────────────────────────────────────────────────────────
+window.khOpen=function(){const o=_$('kh-overlay');if(o) o.classList.add('open');};
+window.khClose=function(){const o=_$('kh-overlay');if(o) o.classList.remove('open');};
+
+// Hook el botó '?' de la topbar perquè obri aquest panell (en lloc del help original)
+// — però sense trencar res: deixem que l'usuari faci servir openHelp() per al menú llarg si vol.
+// Aquí afegim un trigger extra més obvi: tocar "?" al teclat ja ho fa.
+
+// ───────────────────────────────────────────────────────────
+// 5. TIMELINE — Vista 'Avui' a Inici
+// ───────────────────────────────────────────────────────────
+function _durMins(d){const m=(d||'').match(/(\d+)/);return m?parseInt(m[1],10):60;}
+function _t2m(t){const p=(t||'00:00').split(':');return (parseInt(p[0],10)||0)*60+(parseInt(p[1],10)||0);}
+function _fmtHr(m){const h=Math.floor(m/60),mm=m%60;return String(h).padStart(2,'0')+':'+String(mm).padStart(2,'0');}
+
+function renderTodayTimeline(){
+  // Compatibilitat: la funció manté el nom per als patches existents.
+  return renderHomeDashboard();
+}
+function renderHomeDashboard(){
+  const host=_$('home-today');if(!host) return;
+  if(typeof window.isoDate!=='function') return;
+  const data=v2DataLs();
+  const today=new Date();
+  const todayIso=window.isoDate(today);
+  const nowM=today.getHours()*60+today.getMinutes();
+  const sessToday=data.sessions.filter(s=>s.date===todayIso).sort((a,b)=>a.t.localeCompare(b.t));
+
+  // Pròxima sessió
+  let nextSess=null,isOngoing=false;
+  for(const s of sessToday){
+    if(s.status==='cancel') continue;
+    const sm=_t2m(s.t),em=sm+_durMins(s.dur);
+    if(nowM>=sm&&nowM<em&&s.status!=='done'){nextSess=s;isOngoing=true;break;}
+  }
+  if(!nextSess){
+    nextSess=sessToday.find(s=>s.status!=='cancel'&&s.status!=='done'&&_t2m(s.t)>nowM)||null;
+  }
+  if(!nextSess){
+    const future=data.sessions.filter(s=>s.date>todayIso&&s.status!=='cancel').sort((a,b)=>(a.date+a.t).localeCompare(b.date+b.t));
+    if(future.length) nextSess=future[0];
+  }
+
+  const getCli=id=>data.clients.find(c=>c.id===id);
+  const sessTitle=s=>{
+    if(!s) return '';
+    if(typeof window.sessDisplayName==='function'){
+      try{return window.sessDisplayName(s);}catch(e){}
+    }
+    const ids=s.clientIds||[];
+    return ids.map(id=>{const c=getCli(id);return c?(c.nom+(c.cognoms?' '+c.cognoms:'')):'Client';}).join(', ')||'Sessió';
+  };
+  const typeLabel={individual:'individual',pareja:'parella',grupo:'grup'};
+
+  // ── Card pròxima sessió ──
+  let nextCardHtml='';
+  if(nextSess){
+    const sm=_t2m(nextSess.t),dur=_durMins(nextSess.dur),em=sm+dur;
+    let countdown='',badge='',cardClass='';
+    if(nextSess.date===todayIso){
+      if(isOngoing){
+        const rem=em-nowM;
+        countdown='queden '+(rem>=60?Math.floor(rem/60)+'h '+(rem%60?(rem%60)+'min':''):rem+' min');
+        badge='<span class="hd-ongoing-pulse"></span>EN PROGRÉS';
+        cardClass='is-ongoing';
+      } else {
+        const diff=sm-nowM;
+        if(diff<60) countdown='d\'aquí '+diff+' min';
+        else if(diff<480) countdown='d\'aquí '+Math.floor(diff/60)+'h '+(diff%60?(diff%60)+'min':'');
+        else countdown='avui · '+nextSess.t;
+        badge='PRÒXIMA · AVUI';
+      }
+    } else {
+      const diffDays=Math.round((new Date(nextSess.date+'T00:00:00')-new Date(todayIso+'T00:00:00'))/86400000);
+      countdown=diffDays===1?'demà · '+nextSess.t:'d\'aquí '+diffDays+' dies · '+nextSess.t;
+      badge='PRÒXIMA';
+    }
+    const tl=typeLabel[nextSess.type]||nextSess.type||'';
+    const exCount=(nextSess.exercises||[]).length+(nextSess.blocks||[]).reduce((a,b)=>a+(b.exercises||[]).length,0);
+    const noPlan=!exCount;
+    const planLabel=exCount?(exCount+' ex planificats'):'⚠ Sense plan';
+    nextCardHtml='<div class="hd-next '+cardClass+'" data-sid="'+nextSess.id+'">'
+      +'<div class="hd-next-badge">'+badge+'</div>'
+      +'<div class="hd-next-body">'
+        +'<div class="hd-next-time">'+escapeHtml(nextSess.t)+'</div>'
+        +'<div class="hd-next-main">'
+          +'<div class="hd-next-name">'+escapeHtml(sessTitle(nextSess))+'</div>'
+          +'<div class="hd-next-meta">'+escapeHtml(countdown)+' · '+escapeHtml(nextSess.dur||'')+(tl?' · '+escapeHtml(tl):'')+'</div>'
+        +'</div>'
+      +'</div>'
+      +'<div class="hd-next-actions">'
+        +'<button class="hd-next-btn" data-act="detail">Veure detall</button>'
+        +'<button class="hd-next-btn '+(noPlan?'is-warn':'')+'" data-act="plan">'+escapeHtml(planLabel)+'</button>'
+        +(isOngoing?'<button class="hd-next-btn is-primary" data-act="done">✓ Feta</button>':'')
+      +'</div>'
+    +'</div>';
+  } else {
+    nextCardHtml='<div class="hd-empty-card">'
+      +'<div class="hd-empty-icon">🎉</div>'
+      +'<div class="hd-empty-title">Cap sessió pendent</div>'
+      +'<div class="hd-empty-sub">Aprofita per planificar la setmana</div>'
+      +'<button class="btn-main btn-sm" style="margin-top:12px" onclick="openSessionDrawer()">+ Nova sessió</button>'
+    +'</div>';
+  }
+
+  // ── Tasques pendents ──
+  const tasks=[];
+  const sessActive=data.sessions.filter(s=>s.date>=todayIso&&s.status!=='cancel'&&s.status!=='done');
+  const noPlan=sessActive.filter(s=>!(s.exercises||[]).length&&!(s.blocks||[]).length);
+  if(noPlan.length){
+    const first=noPlan.slice().sort((a,b)=>(a.date+a.t).localeCompare(b.date+b.t))[0];
+    tasks.push({icon:'📋',text:noPlan.length+' sessi'+(noPlan.length>1?'ons':'ó')+' sense plan',sub:'planificar exercicis',action:'plan-first',sid:first.id});
+  }
+  const inactive=data.clients.filter(c=>{
+    if(c.id==null) return false;
+    const sc=data.sessions.filter(s=>(s.clientIds||[]).includes(c.id)&&s.status==='done');
+    if(!sc.length) return false;
+    const last=sc.slice().sort((a,b)=>b.date.localeCompare(a.date))[0];
+    const days=Math.floor((today-new Date(last.date+'T00:00:00'))/86400000);
+    return days>=21;
+  });
+  if(inactive.length){
+    tasks.push({icon:'👤',text:inactive.length+' client'+(inactive.length>1?'s':'')+' inactius',sub:'+ de 3 setmanes sense sessió',action:'clients-tab'});
+  }
+  // Sessions fetes aquest mes (info útil — no clica)
+  const monthIso=todayIso.slice(0,7);
+  const doneMonth=data.sessions.filter(s=>s.date.startsWith(monthIso)&&s.status==='done').length;
+  if(doneMonth&&doneMonth>=4){
+    tasks.push({icon:'✨',text:doneMonth+' sessions fetes aquest mes',sub:'revisar facturació',action:'invoices-tab'});
+  }
+  let tasksHtml='';
+  if(tasks.length){
+    tasksHtml=tasks.map(t=>'<div class="hd-task" data-action="'+t.action+'"'+(t.sid?' data-sid="'+t.sid+'"':'')+'>'
+      +'<div class="hd-task-icon">'+t.icon+'</div>'
+      +'<div class="hd-task-main"><div class="hd-task-text">'+escapeHtml(t.text)+'</div><div class="hd-task-sub">'+escapeHtml(t.sub)+'</div></div>'
+      +'<span class="hd-task-arrow">→</span>'
+    +'</div>').join('');
+  } else {
+    tasksHtml='<div class="hd-task-empty">✓ Tot al dia · cap pendent</div>';
+  }
+
+  // ── La resta del dia ──
+  const restToday=sessToday.filter(s=>{
+    if(nextSess&&nextSess.date===todayIso&&s.id===nextSess.id) return false;
+    return true;
+  });
+  let restHtml='';
+  if(restToday.length){
+    restHtml='<div class="hd-rest">'
+      +'<div class="hd-section-title">La resta d\'avui · '+restToday.length+' sessi'+(restToday.length>1?'ons':'ó')+'</div>'
+      +'<div class="hd-rest-list">'
+      +restToday.map(s=>{
+        const isDone=s.status==='done',isCancel=s.status==='cancel';
+        const tl=typeLabel[s.type]||s.type||'';
+        return '<div class="hd-rest-item'+(isDone?' is-done':'')+(isCancel?' is-cancel':'')+'" data-sid="'+s.id+'">'
+          +'<div class="hd-rest-time">'+escapeHtml(s.t)+'</div>'
+          +'<div class="hd-rest-name">'+escapeHtml(sessTitle(s))+'</div>'
+          +(tl?'<div class="hd-rest-badge">'+escapeHtml(tl)+'</div>':'')
+          +'<button class="hd-rest-done" data-sid="'+s.id+'" title="'+(isDone?'Desmarcar':'Marcar feta')+'">'+(isDone?'✓':'○')+'</button>'
+        +'</div>';
+      }).join('')
+      +'</div></div>';
+  }
+
+  // ── Plantilles ràpides ──
+  const topTpls=data.templates.slice(0,5);
+  let tplHtml='';
+  if(topTpls.length||data.templates.length===0){
+    const chips=topTpls.map(t=>{
+      const ec=(t.blocks||[]).reduce((a,b)=>a+(b.exercises||[]).length,0);
+      return '<button class="hd-tpl-chip" data-tid="'+t.id+'"><span class="hd-tpl-name">'+escapeHtml(t.nom||'Plantilla')+'</span><span class="hd-tpl-meta">'+ec+' ex</span></button>';
+    }).join('');
+    tplHtml='<div class="hd-tpls">'
+      +'<div class="hd-section-title">Plantilles · accés ràpid</div>'
+      +'<div class="hd-tpl-chips">'+chips+'<button class="hd-tpl-chip is-add" onclick="openTemplateDrawer()">+ Nova</button></div>'
+    +'</div>';
+  }
+
+  // Render
+  host.innerHTML=nextCardHtml
+    +'<div class="hd-grid">'
+      +'<div class="hd-panel"><div class="hd-section-title">Pendent</div>'+tasksHtml+'</div>'
+      +'<div class="hd-panel"><div class="hd-section-title">Accés ràpid</div>'
+        +'<div class="hd-quick-list">'
+          +'<button class="hd-quick" data-q="new-sess"><span class="hd-quick-ic">➕</span><span class="hd-quick-l">Nova sessió</span><span class="hd-quick-kbd">N</span></button>'
+          +'<button class="hd-quick" data-q="new-client"><span class="hd-quick-ic">👤</span><span class="hd-quick-l">Nou client</span><span class="hd-quick-kbd">⇧C</span></button>'
+          +'<button class="hd-quick" data-q="new-tpl"><span class="hd-quick-ic">📋</span><span class="hd-quick-l">Nova plantilla</span><span class="hd-quick-kbd">⇧P</span></button>'
+          +'<button class="hd-quick" data-q="search"><span class="hd-quick-ic">⌕</span><span class="hd-quick-l">Cerca ràpida</span><span class="hd-quick-kbd">⌘K</span></button>'
+        +'</div>'
+      +'</div>'
+    +'</div>'
+    +restHtml
+    +tplHtml;
+
+  // ── Bind ──
+  host.querySelectorAll('.hd-next [data-act]').forEach(btn=>{
+    btn.addEventListener('click',e=>{
+      e.stopPropagation();
+      const act=btn.dataset.act;
+      const card=btn.closest('.hd-next');
+      const sid=parseInt(card.dataset.sid,10);
+      if(act==='detail'&&typeof window.openSessionDetail==='function') window.openSessionDetail(sid);
+      else if(act==='plan'&&typeof window.openSessExercisePlanner==='function') window.openSessExercisePlanner(sid);
+      else if(act==='done'&&typeof window.toggleStatus==='function'){
+        window.toggleStatus(sid);setTimeout(renderHomeDashboard,30);
+      }
+    });
+  });
+  const nextCard=host.querySelector('.hd-next');
+  if(nextCard){
+    const body=nextCard.querySelector('.hd-next-body');
+    if(body) body.addEventListener('click',()=>{
+      const sid=parseInt(nextCard.dataset.sid,10);
+      if(typeof window.openSessionDetail==='function') window.openSessionDetail(sid);
+    });
+  }
+  host.querySelectorAll('.hd-task').forEach(el=>{
+    el.addEventListener('click',()=>{
+      const act=el.dataset.action;
+      if(act==='plan-first'){
+        const sid=parseInt(el.dataset.sid,10);
+        if(typeof window.openSessExercisePlanner==='function') window.openSessExercisePlanner(sid);
+      } else if(act==='clients-tab'){
+        window.v2GoTab('clients');
+      } else if(act==='invoices-tab'){
+        window.v2GoTab('factures');
+      }
+    });
+  });
+  host.querySelectorAll('.hd-quick').forEach(el=>{
+    el.addEventListener('click',()=>{
+      const q=el.dataset.q;
+      if(q==='new-sess'&&window.openSessionDrawer) window.openSessionDrawer();
+      else if(q==='new-client'&&window.openClientDrawer) window.openClientDrawer();
+      else if(q==='new-tpl'&&window.openTemplateDrawer) window.openTemplateDrawer();
+      else if(q==='search') window.cpOpen&&window.cpOpen();
+    });
+  });
+  host.querySelectorAll('.hd-rest-item').forEach(el=>{
+    el.addEventListener('click',ev=>{
+      if(ev.target.closest('.hd-rest-done')) return;
+      const sid=parseInt(el.dataset.sid,10);
+      if(typeof window.openSessionDetail==='function') window.openSessionDetail(sid);
+    });
+  });
+  host.querySelectorAll('.hd-rest-done').forEach(btn=>{
+    btn.addEventListener('click',ev=>{
+      ev.stopPropagation();
+      const sid=parseInt(btn.dataset.sid,10);
+      if(typeof window.toggleStatus==='function'){
+        window.toggleStatus(sid);
+        setTimeout(renderHomeDashboard,30);
+      }
+    });
+  });
+  host.querySelectorAll('.hd-tpl-chip[data-tid]').forEach(el=>{
+    el.addEventListener('click',()=>{
+      window.v2GoTab&&window.v2GoTab('plantilles');
+    });
+  });
+}
+function _fmtAvui(){
+  const days=['diumenge','dilluns','dimarts','dimecres','dijous','divendres','dissabte'];
+  const months=['gen','feb','mar','abr','mai','jun','jul','ago','set','oct','nov','des'];
+  const d=new Date();
+  return days[d.getDay()]+' '+d.getDate()+' '+months[d.getMonth()];
+}
+
+// Hook: substituir renderHomeToday per la nova versió timeline
+// — i conservar la versió original com a fallback per si una crida directa la necessita.
+(function patchHomeToday(){
+  if(typeof window.renderHomeToday==='function'){
+    window._origRenderHomeToday=window.renderHomeToday;
+    window.renderHomeToday=function(){
+      try{renderTodayTimeline();}
+      catch(e){console.warn('Timeline error, fallback:',e);try{window._origRenderHomeToday();}catch(_){}}
+    };
+  }
+  if(typeof window.renderHomeTodayFinal==='function'){
+    const _orig=window.renderHomeTodayFinal;
+    window.renderHomeTodayFinal=function(){
+      try{
+        // Si no hi ha sessions avui ni clients, conservem la pantalla de benvinguda original
+        const isoFn=window.isoDate;
+        const todayIso=(typeof isoFn==='function')?isoFn(new Date()):null;
+        const sessToday=v2DataLs().sessions.filter(s=>s.date===todayIso);
+        if(v2DataLs().clients.length===0 && sessToday.length===0){
+          _orig();
+          return;
+        }
+        _orig();
+        // Render del timeline com a última operació
+        renderTodayTimeline();
+      }catch(e){_orig();}
+    };
+  }
+})();
+
+// Refresca el timeline cada minut perquè la línia "ara" es mogui
+setInterval(()=>{
+  const home=document.getElementById('s-home');
+  if(home&&home.classList.contains('active')){
+    try{renderTodayTimeline();}catch(e){}
+  }
+},60000);
+
+// ───────────────────────────────────────────────────────────
+// 6. Topbar — afegir botó/hint ⌘K i ?
+// ───────────────────────────────────────────────────────────
+(function injectKbdHint(){
+  const ready=()=>{
+    const topbarRight=document.querySelector('.topbar > div:last-child');
+    if(!topbarRight) return false;
+    if(document.getElementById('v2-kbd-hint')) return true;
+    const hint=document.createElement('button');
+    hint.id='v2-kbd-hint';
+    hint.className='kbd-hint';
+    hint.type='button';
+    hint.innerHTML='<kbd>⌘</kbd><kbd>K</kbd>';
+    hint.title='Cerca ràpida (⌘K)';
+    hint.onclick=cpOpen;
+    // Insertar abans del botó de configuració
+    const cfg=topbarRight.querySelector('button[onclick*="openSettings"]');
+    if(cfg) topbarRight.insertBefore(hint,cfg);
+    else topbarRight.appendChild(hint);
+    return true;
+  };
+  if(!ready()) document.addEventListener('DOMContentLoaded',ready);
+})();
+
+// ───────────────────────────────────────────────────────────
+// 7. Inicialització: sincronies + primer render del timeline
+// ───────────────────────────────────────────────────────────
+function v2Init(){
+  // Sincronia inicial del bottom-nav segons la secció activa
+  const active=document.querySelector('.section.active');
+  if(active){
+    const id=(active.id||'').replace(/^s-/,'')||'home';
+    v2SyncBottomNav(id);
+    const fab=_$('fab');
+    if(fab) fab.classList.toggle('fab-hide',!(id==='home'||id==='agenda'||id==='clients'));
+  }
+  // Primer render del timeline si som a Inici
+  if(document.getElementById('s-home')&&document.getElementById('s-home').classList.contains('active')){
+    try{renderTodayTimeline();}catch(e){}
+  }
+}
+if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',v2Init);
+else setTimeout(v2Init,40);
+
+// Quan es desa qualsevol cosa (i el codi crida lsSave), refresquem el timeline si cal
+if(typeof window.lsSave==='function'){
+  const _origLs=window.lsSave;
+  window.lsSave=function(){
+    _origLs.apply(this,arguments);
+    const home=document.getElementById('s-home');
+    if(home&&home.classList.contains('active')){
+      try{renderTodayTimeline();}catch(e){}
+    }
+  };
+}
+
+// ═══════════════════════════════════════════════════════════
+// 8. SESSION PLANNER — millores per crear entrenaments més ràpid
+// ═══════════════════════════════════════════════════════════
+const PLANNER_EXTRA_CSS=`
+.pp-extras{margin-top:-4px;margin-bottom:12px}
+.pp-card{background:#fff;border:0.5px solid #D3D1C7;border-radius:10px;padding:10px 12px;margin-bottom:8px}
+.pp-card-h{display:flex;align-items:center;justify-content:space-between;margin-bottom:7px;gap:8px}
+.pp-card-h-title{font-size:11px;text-transform:uppercase;letter-spacing:0.06em;color:#888780;font-weight:500}
+.pp-search-wrap{position:relative;margin-bottom:8px}
+.pp-search-wrap::before{content:'⌕';position:absolute;left:10px;top:50%;transform:translateY(-50%);color:#888780;font-size:13px;pointer-events:none}
+.pp-search{width:100%;padding:8px 32px 8px 30px;font-size:13px;border:0.5px solid #D3D1C7;border-radius:8px;background:#F8F6F2;color:#2C2C2A;font-family:inherit;outline:none;transition:all 0.12s}
+.pp-search:focus{background:#fff;border-color:#185FA5;box-shadow:0 0 0 3px rgba(24,95,165,0.08)}
+.pp-search-clear{position:absolute;right:8px;top:50%;transform:translateY(-50%);width:20px;height:20px;border:none;background:#D3D1C7;color:#fff;border-radius:50%;font-size:11px;cursor:pointer;display:none;align-items:center;justify-content:center;font-family:inherit}
+.pp-search-wrap.has-q .pp-search-clear{display:flex}
+.pp-chips-row{display:flex;gap:6px;flex-wrap:wrap}
+.pp-chip{display:inline-flex;align-items:center;gap:5px;padding:5px 10px;border-radius:18px;background:#F0EEE8;border:0.5px solid #D3D1C7;color:#2C2C2A;font-size:12px;cursor:pointer;font-family:inherit;-webkit-tap-highlight-color:transparent;transition:all 0.12s;white-space:nowrap}
+.pp-chip:hover{background:#185FA5;color:#fff;border-color:#185FA5}
+.pp-chip.is-added{background:#E1F5EE;color:#0F6E56;border-color:#9FE1CB}
+.pp-chip.is-added:hover{background:#1D9E75;color:#fff;border-color:#1D9E75}
+.pp-chip-count{font-size:10px;opacity:0.7;font-variant-numeric:tabular-nums}
+.pp-empty-mini{font-size:11px;color:#B4B2A9;font-style:italic;padding:6px 2px}
+.pp-search-results{margin-top:8px;background:#F8F6F2;border-radius:8px;padding:6px;max-height:240px;overflow-y:auto;display:none}
+.pp-search-results.show{display:block}
+.pp-search-item{display:flex;align-items:center;gap:9px;padding:7px 9px;background:#fff;border:0.5px solid #D3D1C7;border-radius:7px;margin-bottom:4px;cursor:pointer;transition:all 0.12s}
+.pp-search-item:last-child{margin-bottom:0}
+.pp-search-item:hover{border-color:#185FA5;background:#F5F9FD}
+.pp-search-item.is-added{background:#F0FAF6;border-color:#9FE1CB}
+.pp-search-item-name{flex:1;font-size:13px;color:#2C2C2A;display:flex;align-items:center;gap:6px}
+.pp-search-item-group{font-size:10px;color:#888780;background:#F0EEE8;padding:1px 6px;border-radius:10px}
+.pp-search-item-add{width:24px;height:24px;border-radius:6px;border:0.5px solid #B4B2A9;background:#EDECEA;cursor:pointer;font-size:13px;color:#2C2C2A;font-family:inherit;display:flex;align-items:center;justify-content:center}
+.pp-search-item.is-added .pp-search-item-add{background:#1D9E75;color:#fff;border-color:#1D9E75}
+.pp-presets{display:flex;gap:4px;flex-wrap:wrap;align-items:center}
+.pp-preset-chip{padding:3px 9px;border-radius:14px;background:#EDECEA;border:0.5px solid #D3D1C7;color:#5F5E5A;font-size:11px;cursor:pointer;font-family:'SF Mono','Monaco',monospace;-webkit-tap-highlight-color:transparent;transition:all 0.12s}
+.pp-preset-chip:hover{background:#185FA5;color:#fff;border-color:#185FA5}
+.pp-preset-info{font-size:10px;color:#888780;margin-left:auto}
+.pp-action-row{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:8px}
+.pp-action-btn{display:inline-flex;align-items:center;gap:5px;padding:6px 10px;border-radius:8px;border:0.5px solid #D3D1C7;background:#fff;color:#2C2C2A;font-size:12px;cursor:pointer;font-family:inherit;transition:all 0.12s;-webkit-tap-highlight-color:transparent;font-weight:500}
+.pp-action-btn:hover{background:#185FA5;color:#fff;border-color:#185FA5}
+.pp-action-btn.disabled{opacity:0.45;cursor:not-allowed;pointer-events:none}
+`;
+(function injectPlannerCss(){
+  if(document.getElementById('pp-extras-style')) return;
+  const s=document.createElement('style');s.id='pp-extras-style';s.textContent=PLANNER_EXTRA_CSS;
+  document.head.appendChild(s);
+})();
+
+// Recompte d'exercicis més usats a partir de sessions passades
+function v2MostUsedExercises(limit){
+  const cnt={};
+  v2DataLs().sessions.forEach(s=>{
+    (s.exercises||[]).forEach(e=>{
+      if(!e||!e.name) return;
+      const k=(e.group||'')+'|'+e.name;
+      cnt[k]=(cnt[k]||0)+1;
+    });
+  });
+  const arr=Object.keys(cnt).map(k=>{
+    const [group,name]=k.split('|');
+    return {group,name,count:cnt[k]};
+  });
+  arr.sort((a,b)=>b.count-a.count);
+  return arr.slice(0,limit||10);
+}
+// Última sessió no-buida del mateix client(s)
+function v2LastSessionWithExercises(currentSessId){
+  const s=v2DataLs().sessions.find(x=>x.id===currentSessId);
+  if(!s) return null;
+  const clientIds=new Set(s.clientIds||[]);
+  const candidates=v2DataLs().sessions.filter(x=>{
+    if(x.id===currentSessId) return false;
+    if(!(x.exercises||[]).length) return false;
+    if(x.date>s.date) return false;
+    if(x.date===s.date&&x.t>=s.t) return false;
+    return (x.clientIds||[]).some(id=>clientIds.has(id));
+  });
+  candidates.sort((a,b)=>(b.date+b.t).localeCompare(a.date+a.t));
+  return candidates[0]||null;
+}
+
+function v2PlannerEnhance(sessId){
+  const drawer=document.getElementById('sess-plan-drawer');
+  if(!drawer||drawer.style.display==='none') return;
+  // Eliminar les nostres injeccions antigues si en quedaven
+  drawer.querySelectorAll('.pp-extras').forEach(n=>n.remove());
+
+  const tplPicker=document.getElementById('sp-tpl-picker');
+  if(!tplPicker) return;
+  const exs=v2DataLs().sessions.find(x=>x.id===sessId)||null;
+
+  // Construir extras
+  const wrap=document.createElement('div');
+  wrap.className='pp-extras';
+
+  // (1) Accions ràpides: copia última sessió
+  const last=v2LastSessionWithExercises(sessId);
+  const actRow=document.createElement('div');
+  actRow.className='pp-action-row';
+  if(last&&(last.exercises||[]).length){
+    const dLabel=last.date+' · '+(last.t||'');
+    const exCount=last.exercises.length;
+    actRow.innerHTML='<button type="button" class="pp-action-btn" id="pp-copy-last" title="Copia els exercicis de l\u2019\u00faltima sessi\u00f3 d\u2019aquest client">↺ Copia de l\u2019\u00faltima sessi\u00f3 <span style="color:#888780;font-weight:400">('+exCount+' ex · '+dLabel+')</span></button>';
+  } else {
+    actRow.innerHTML='<button type="button" class="pp-action-btn disabled" title="Encara no hi ha sessions anteriors amb exercicis">↺ Copia de l\u2019\u00faltima sessi\u00f3</button>';
+  }
+  wrap.appendChild(actRow);
+
+  // (2) Cerca ràpida
+  const searchCard=document.createElement('div');
+  searchCard.className='pp-card';
+  searchCard.innerHTML=
+    '<div class="pp-card-h"><span class="pp-card-h-title">Cerca ràpida d\'exercicis</span></div>'
+    +'<div class="pp-search-wrap"><input class="pp-search" id="pp-search" placeholder="Cerca per nom o grup..." autocomplete="off" spellcheck="false"><button class="pp-search-clear" id="pp-search-clear" title="Esborrar">✕</button></div>'
+    +'<div class="pp-search-results" id="pp-search-results"></div>';
+  wrap.appendChild(searchCard);
+
+  // (3) Recents / més usats
+  const mostUsed=v2MostUsedExercises(12);
+  if(mostUsed.length){
+    const recCard=document.createElement('div');
+    recCard.className='pp-card';
+    let chipsHtml='';
+    mostUsed.forEach(item=>{
+      // Trobar l'exercici al DB per validar que encara existeix
+      const grp=item.group;
+      const _eDb=v2DataLs().exerciseDB; const inDb=(_eDb[grp]||[]).some(e=>(typeof e==='string'?e:e.nom)===item.name);
+      if(!inDb) return;
+      const added=_v2SelNames().has(item.name);
+      chipsHtml+='<button type="button" class="pp-chip'+(added?' is-added':'')+'" data-grp="'+escapeHtml(grp)+'" data-name="'+escapeHtml(item.name)+'">'
+        +'<span>'+escapeHtml(item.name)+'</span><span class="pp-chip-count">×'+item.count+'</span></button>';
+    });
+    if(chipsHtml){
+      recCard.innerHTML='<div class="pp-card-h"><span class="pp-card-h-title">Més usats</span><span style="font-size:10px;color:#888780">toca per afegir o treure</span></div>'
+        +'<div class="pp-chips-row" id="pp-recent-chips">'+chipsHtml+'</div>';
+      wrap.appendChild(recCard);
+    }
+  }
+
+  // (4) Presets de sèries (només si hi ha alguna seleccionada)
+  const presetsCard=document.createElement('div');
+  presetsCard.className='pp-card';
+  presetsCard.id='pp-presets-card';
+  presetsCard.innerHTML='<div class="pp-card-h"><span class="pp-card-h-title">Aplica sèries a tots</span><span class="pp-preset-info" id="pp-preset-info"></span></div>'
+    +'<div class="pp-presets">'
+      +'<button type="button" class="pp-preset-chip" data-sets="3×10">3×10</button>'
+      +'<button type="button" class="pp-preset-chip" data-sets="3×12">3×12</button>'
+      +'<button type="button" class="pp-preset-chip" data-sets="4×8">4×8</button>'
+      +'<button type="button" class="pp-preset-chip" data-sets="4×10">4×10</button>'
+      +'<button type="button" class="pp-preset-chip" data-sets="5×5">5×5</button>'
+      +'<button type="button" class="pp-preset-chip" data-sets="3×15">3×15</button>'
+      +'<button type="button" class="pp-preset-chip" data-sets="2×20">2×20</button>'
+      +'<button type="button" class="pp-preset-chip" data-sets="AMRAP">AMRAP</button>'
+    +'</div>';
+  wrap.appendChild(presetsCard);
+
+  // Inserir abans del picker de plantilles
+  tplPicker.parentNode.insertBefore(wrap,tplPicker);
+
+  // ─── Bind ─────────────────────────────────────────────────
+  // Copia última sessió
+  const copyBtn=document.getElementById('pp-copy-last');
+  if(copyBtn&&!copyBtn.classList.contains('disabled')){
+    copyBtn.onclick=()=>{
+      if(!last) return;
+      // Noms ja seleccionats (via DOM)
+      const existingNames=new Set(Array.from(document.querySelectorAll('#sp-selected-list .sp-sel-name')).map(el=>el.textContent.trim()));
+      let added=0;
+      (last.exercises||[]).forEach(ex=>{
+        if(existingNames.has(ex.name)) return;
+        if(typeof window.toggleSpExercise==='function'){
+          window.toggleSpExercise(ex.group,ex.name);
+          added++;
+        }
+      });
+      // Després d'afegir, sincronitzar els 'sets' al DOM
+      setTimeout(()=>{
+        const items=document.querySelectorAll('#sp-selected-list .sp-sel-item');
+        items.forEach(item=>{
+          const nm=item.querySelector('.sp-sel-name');
+          const inp=item.querySelector('.sp-sel-sets');
+          if(!nm||!inp) return;
+          const match=(last.exercises||[]).find(e=>e.name===nm.textContent.trim()&&e.sets);
+          if(match&&inp.value!==match.sets){
+            inp.value=match.sets;
+            inp.dispatchEvent(new Event('change',{bubbles:true}));
+          }
+        });
+        v2PlannerRefreshRecents();
+        v2PlannerUpdatePresetInfo();
+      },60);
+      window.toast&&window.toast('✓ '+added+' exercicis copiats de '+last.date);
+    };
+  }
+
+  // Cerca
+  const searchInp=document.getElementById('pp-search');
+  const searchWrap=searchInp&&searchInp.closest('.pp-search-wrap');
+  const searchClear=document.getElementById('pp-search-clear');
+  const resultsBox=document.getElementById('pp-search-results');
+  function runSearch(q){
+    const lq=(q||'').toLowerCase().trim();
+    if(searchWrap) searchWrap.classList.toggle('has-q',!!lq);
+    if(!lq){resultsBox.classList.remove('show');resultsBox.innerHTML='';return;}
+    const matches=[];
+    const _ed=v2DataLs().exerciseDB; Object.keys(_ed).forEach(grp=>{(_ed[grp]||[]).forEach(e=>{
+        const nom=typeof e==='string'?e:e.nom;
+        if(!nom) return;
+        if(nom.toLowerCase().includes(lq)||grp.toLowerCase().includes(lq)){
+          matches.push({group:grp,name:nom});
+        }
+      });
+    });
+    matches.sort((a,b)=>a.name.localeCompare(b.name));
+    const top=matches.slice(0,20);
+    if(!top.length){resultsBox.innerHTML='<div class="pp-empty-mini" style="padding:10px 6px">Cap exercici amb "'+escapeHtml(q)+'"</div>';resultsBox.classList.add('show');return;}
+    resultsBox.innerHTML=top.map(it=>{
+      const added=_v2SelNames().has(it.name);
+      return '<div class="pp-search-item'+(added?' is-added':'')+'" data-grp="'+escapeHtml(it.group)+'" data-name="'+escapeHtml(it.name)+'">'
+        +'<div class="pp-search-item-name">'+escapeHtml(it.name)+'</div>'
+        +'<span class="pp-search-item-group">'+escapeHtml(it.group)+'</span>'
+        +'<button class="pp-search-item-add">'+(added?'✓':'+')+'</button>'
+        +'</div>';
+    }).join('');
+    resultsBox.classList.add('show');
+    resultsBox.querySelectorAll('.pp-search-item').forEach(el=>{
+      el.addEventListener('click',()=>{
+        const grp=el.dataset.grp,name=el.dataset.name;
+        if(typeof window.toggleSpExercise==='function') window.toggleSpExercise(grp,name);
+        runSearch(searchInp.value);
+        v2PlannerRefreshRecents();
+        v2PlannerUpdatePresetInfo();
+      });
+    });
+  }
+  if(searchInp) searchInp.addEventListener('input',e=>runSearch(e.target.value));
+  if(searchClear) searchClear.addEventListener('click',()=>{searchInp.value='';runSearch('');searchInp.focus();});
+
+  // Recents chips
+  function bindRecentChips(){
+    document.querySelectorAll('#pp-recent-chips .pp-chip').forEach(el=>{
+      el.onclick=()=>{
+        const grp=el.dataset.grp,name=el.dataset.name;
+        if(typeof window.toggleSpExercise==='function') window.toggleSpExercise(grp,name);
+        v2PlannerRefreshRecents();
+        v2PlannerUpdatePresetInfo();
+        if(searchInp&&searchInp.value) runSearch(searchInp.value);
+      };
+    });
+  }
+  bindRecentChips();
+  window._v2BindRecentChips=bindRecentChips;
+
+  // Presets
+  document.querySelectorAll('#pp-presets-card .pp-preset-chip').forEach(el=>{
+    el.onclick=()=>{
+      const sets=el.dataset.sets;
+      const inputs=document.querySelectorAll('#sp-selected-list .sp-sel-sets');
+      if(!sets||!inputs.length){window.toast&&window.toast('Selecciona exercicis primer');return;}
+      inputs.forEach(inp=>{
+        inp.value=sets;
+        inp.dispatchEvent(new Event('change',{bubbles:true}));
+      });
+      v2PlannerUpdatePresetInfo();
+      window.toast&&window.toast('✓ '+sets+' aplicat a '+inputs.length+' exercici'+(inputs.length!==1?'s':''));
+    };
+  });
+  v2PlannerUpdatePresetInfo();
+}
+
+function _v2SelNames(){
+  return new Set(Array.from(document.querySelectorAll('#sp-selected-list .sp-sel-name')).map(el=>el.textContent.trim()));
+}
+function v2PlannerRefreshRecents(){
+  // Llegim els noms seleccionats actualment des del DOM
+  const names=new Set(Array.from(document.querySelectorAll('#sp-selected-list .sp-sel-name')).map(el=>el.textContent.trim()));
+  document.querySelectorAll('#pp-recent-chips .pp-chip').forEach(el=>{
+    el.classList.toggle('is-added',names.has(el.dataset.name));
+  });
+  // Mateixa cosa per als resultats de cerca
+  document.querySelectorAll('#pp-search-results .pp-search-item').forEach(el=>{
+    const isAdded=names.has(el.dataset.name);
+    el.classList.toggle('is-added',isAdded);
+    const btn=el.querySelector('.pp-search-item-add');
+    if(btn) btn.textContent=isAdded?'✓':'+';
+  });
+}
+function v2PlannerUpdatePresetInfo(){
+  const info=document.getElementById('pp-preset-info');
+  if(!info) return;
+  const n=document.querySelectorAll('#sp-selected-list .sp-sel-item').length;
+  info.textContent=n?(n+' exercici'+(n!==1?'s':'')+' seleccionats'):'Selecciona exercicis primer';
+}
+
+// Hook obertura del planner
+if(typeof window.openSessExercisePlanner==='function'){
+  const _origPp=window.openSessExercisePlanner;
+  window.openSessExercisePlanner=function(sessId){
+    _origPp(sessId);
+    setTimeout(()=>{
+      try{v2PlannerEnhance(sessId);}catch(e){console.warn('Planner enhance error:',e);}
+    },40);
+  };
+}
+// També quan canvia spSelected via UI original, refresquem els nostres "is-added"
+if(typeof window.toggleSpExercise==='function'){
+  const _origToggle=window.toggleSpExercise;
+  window.toggleSpExercise=function(){
+    _origToggle.apply(this,arguments);
+    try{v2PlannerRefreshRecents();v2PlannerUpdatePresetInfo();}catch(e){}
+  };
+}
+if(typeof window.applyTemplate==='function'){
+  const _origAt=window.applyTemplate;
+  window.applyTemplate=function(){
+    _origAt.apply(this,arguments);
+    try{v2PlannerRefreshRecents();v2PlannerUpdatePresetInfo();}catch(e){}
+  };
+}
+
+})();
+</script>
+
 </body>
 </html>
