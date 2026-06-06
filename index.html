@@ -6021,7 +6021,23 @@ document.addEventListener('keydown',e=>{
 <!-- FAB (només mòbil) -->
 <button type="button" class="fab" id="fab" title="Nova sessió" aria-label="Nova sessió" onclick="openSessionDrawer()">+</button>
 
-<!-- COMMAND PALETTE (⌘K) -->
+<!-- COMMAND PALETTE (⌘K / Ctrl+K) -->
+<script>
+// Detect platform for shortcut display
+const _isMac=navigator.platform.toUpperCase().includes('MAC')||navigator.userAgent.includes('Mac');
+const _modKey=_isMac?'⌘':'Ctrl';
+// Replace all ⌘ displays with correct key after load
+document.addEventListener('DOMContentLoaded',()=>{
+  if(!_isMac){
+    document.querySelectorAll('.cp-foot-kbd,.kh-key,.hd-quick-kbd').forEach(el=>{
+      if(el.textContent==='⌘') el.textContent='Ctrl';
+      else if(el.textContent==='⌘K') el.textContent='Ctrl+K';
+    });
+    const hint=document.getElementById('cp-reopen-hint');
+    if(hint) hint.textContent='Ctrl+K';
+  }
+});
+</script>
 <div class="cp-overlay" id="cp-overlay" onclick="if(event.target===this) cpClose()">
   <div class="cp-modal" role="dialog" aria-label="Cerca ràpida">
     <div class="cp-search-row">
@@ -6033,7 +6049,7 @@ document.addEventListener('keydown',e=>{
     <div class="cp-footer">
       <span><span class="cp-foot-kbd">↑↓</span> navegar</span>
       <span><span class="cp-foot-kbd">↵</span> obrir</span>
-      <span style="margin-left:auto"><span class="cp-foot-kbd">⌘K</span> per tornar a obrir</span>
+      <span style="margin-left:auto"><span class="cp-foot-kbd" id="cp-reopen-hint">⌘K</span> per tornar a obrir</span>
     </div>
   </div>
 </div>
@@ -6048,7 +6064,7 @@ document.addEventListener('keydown',e=>{
     <div class="kh-body">
       <div class="kh-section">
         <div class="kh-sec-title">Cerca i navegació</div>
-        <div class="kh-row"><span class="kh-row-label">Obrir cerca ràpida</span><span class="kh-row-keys"><span class="kh-key">⌘</span><span class="kh-key">K</span></span></div>
+        <div class="kh-row"><span class="kh-row-label">Obrir cerca ràpida</span><span class="kh-row-keys"><span class="kh-key" id="kh-mod-key">⌘</span><span class="kh-key">K</span></span></div>
         <div class="kh-row"><span class="kh-row-label">Focus cerca a la pantalla</span><span class="kh-row-keys"><span class="kh-key">/</span></span></div>
         <div class="kh-row"><span class="kh-row-label">Anar a Inici</span><span class="kh-row-keys"><span class="kh-key">G</span><span class="kh-plus">→</span><span class="kh-key">H</span></span></div>
         <div class="kh-row"><span class="kh-row-label">Anar a Agenda</span><span class="kh-row-keys"><span class="kh-key">G</span><span class="kh-plus">→</span><span class="kh-key">A</span></span></div>
